@@ -57,7 +57,7 @@ def get_instance(plugin):
     db = int(getattr(plugin, 'db', 0))
     expire_time = int(getattr(plugin, 'expire_time', 0))
 
-    instance = Redis_retention_scheduler(plugin, server, password, port, db,
+    instance = Redis_retention_scheduler(plugin, server, port, password, db,
                                          expire_time)
     return instance
 
