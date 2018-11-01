@@ -57,7 +57,7 @@ def get_instance(plugin):
     db = int(getattr(plugin, 'db', 0))
     expire_time = int(getattr(plugin, 'expire_time', 0))
 
-    instance = Redis_retention_scheduler(plugin, server, password, port,
+    instance = Redis_retention_scheduler(plugin, server, password, port, db,
                                          expire_time)
     return instance
 
@@ -76,7 +76,7 @@ class Redis_retention_scheduler(BaseModule):
         Called by Scheduler to say 'let's prepare yourself guy'
         """
         logger.info("[RedisRetention] Initialization of the redis module")
-        self.mc = redis.Redis(host=self.server, port=self.port, password=self.password, db=self.db)
+        self.rc = redis.Redis(host=self.server, port=self.port, password=self.password, db=self.db)
 
     def _get_host_key(self, h_name):
         host_key = 'HOST-%s' % (h_name)
